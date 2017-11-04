@@ -12,4 +12,4 @@ Zapojení:
 * OUT_B: motor levy pas
 * OUT_C: motor pravy pas
 
-![Multibot](https://raw.githubusercontent.com/jiristepan/legoboti/legonxt/multibot/multibot.jpg)
+![Multibot](https://github.com/jiristepan/legoboti/blob/master/legonxt/multibot/multibot.jpg?raw=true)
