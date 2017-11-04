@@ -1,36 +1,33 @@
+/* robot se snazi nejprve nalezt svetlou caru a nasledne ji sledovat */
+
 #define THRESHOLD 40
 
 task main(){
-     //nejdrive najdeme caru
-     PlayFileEx("ahoj.rso",100,false);  //zhraju "ahoj"
-     Wait(1000);//pockam nez to dorekne
-     SetSensorLight(IN_1);//nastavim sensor na IN_1
+                                            //nejdrive najdeme caru
+     PlayFileEx("ahoj.rso",100,false);      //zhraju "ahoj"
+     Wait(1000);                            //pockam nez to dorekne
+     SetSensorLight(IN_1);                  //nastavim sensor na IN_1
 
-
-     
-
-     PlayFileEx("hledamcaru.rso",100,true);//zahraju "hledamcaru" nekonecne
-     Wait(2000);//cekam nez rekne "hledamcaru"
-     OnFwdSync(OUT_BC, 100 , 0);//zapnu motory BC rychlost 100
-     while(Sensor(IN_1) < THRESHOLD){//pokud je sensor nizsi nez 40
+     PlayFileEx("hledamcaru.rso",100,true);                   //zahraju "hledamcaru" nekonecne
+     Wait(2000);                                             //cekam nez rekne "hledamcaru"
+     OnFwdSync(OUT_BC, 100 , 0);                            //zapnu motory BC rychlost 100
+     while(Sensor(IN_1) < THRESHOLD){                      //pokud je sensor nizsi nez 40
            ClearScreen();
             TextOut(10, LCD_LINE1,"Hledam caru");
             TextOut(10, LCD_LINE2,NumToStr(Sensor(IN_1)));
      }
-     Off(OUT_BC);//vypnu motory BC
+     Off(OUT_BC);                                          //vypnu motory BC
      StopSound();//prestanu mluvit
-
 
      while(1==1){//delej stale
 
          //jedu po care
-         PlayFileEx("jeducaru.rso",100,true);  //rekni "jeducaru"
-         OnFwdSync(OUT_BC, 50 , 0);          //zapni motory BC
-         while(Sensor(IN_1) >= THRESHOLD) {//dokud vidim svetlo
-            ClearScreen();                  //vypisuj udaje
+         PlayFileEx("jeducaru.rso",100,true);              //rekni "jeducaru"
+         OnFwdSync(OUT_BC, 50 , 0);                        //zapni motory BC
+         while(Sensor(IN_1) >= THRESHOLD) {                //dokud vidim svetlo
+            ClearScreen();                                 //vypisuj udaje
             TextOut(10, LCD_LINE1,"Jedu caru");
             TextOut(10, LCD_LINE2,NumToStr(Sensor(IN_1)));
-
          }
          //ztratil jsem caru
          //zastavuji
@@ -40,13 +37,13 @@ task main(){
          TextOut(10, LCD_LINE1,"rotuji");
          //ted ji musim najit
          //budu se chvili otacet na jednu stranu dokud neuvidim bilou
-         PlayFileEx("rotuji.rso", 100, true);//rikej "rotuji" nekonecne
-         while(Sensor(IN_1) < THRESHOLD){ //pokud vidim cernou
-            OnFwdSync(OUT_BC, 80, 90);   //zapni motory BC
+         PlayFileEx("rotuji.rso", 100, true);          //rikej "rotuji" nekonecne
+         while(Sensor(IN_1) < THRESHOLD){              //pokud vidim cernou
+            OnFwdSync(OUT_BC, 80, 90);                 //zapni motory BC
             Wait(500);
             Off(OUT_BC);
-            if(Sensor(IN_1) < THRESHOLD){  //pokud vim tmu porad
-               OnFwdSync(OUT_BC, 80, -90); //zapni motory BC o 90 stupnu
+            if(Sensor(IN_1) < THRESHOLD){              //pokud vim tmu porad
+               OnFwdSync(OUT_BC, 80, -90);             //zapni motory BC o 90 stupnu
                 Wait(900);
                 Off(OUT_BC);
             }
