@@ -9,3 +9,7 @@ Zapojení:
 * IN 1: senzor light
 * IN 2: senzor ultrasonic
 * IN 3: senzor zvuk
+* OUT_B: motor levy pas
+* OUT_C: motor pravy pas
+
+![Multibot](https://raw.githubusercontent.com/jiristepan/legoboti/legonxt/multibot/multibot.jpg)
