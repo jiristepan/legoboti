@@ -1,0 +1,34 @@
+#define TRESHOLD 40
+#define INITIALSTEERING 35
+#define BLACKMAX  50
+
+int light;
+int steering;
+int blackCounter;
+
+task main(){
+
+     byte handle;
+     short bytesWritten;
+     CreateFile("ASCII.txt", 2048, handle);
+     string write;
+
+     steering = INITIALSTEERING;
+     SetSensorLight(IN_1);
+
+     while(true){
+        light = Sensor(IN_1);
+        write  = StrCat(NumToStr(light),",");
+        WriteLnString(handle,write, bytesWritten);
+        if(light >= TRESHOLD) {
+           blackCounter = 0;
+           steering =  INITIALSTEERING;
+           OnFwdSync(OUT_BC, 100 , steering);
+        } else {
+           OnFwdSync(OUT_BC, 100 , -steering);
+           blackCounter = blackCounter + 1;
+           if(blackCounter > 50) steering = 90;
+        }
+        Wait(10);
+     }
+}
