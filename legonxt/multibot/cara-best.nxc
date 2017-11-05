@@ -2,11 +2,12 @@
 #define INITIALSTEERING 27
 #define BLACKMAX  50
 
-int light;
-int steering;
-int blackCounter;
-int lightCounter;
-task writeData(){
+int light;         //promene light hodnota sensoru
+int steering;      //aktualni hodnota ztaceni
+int blackCounter;  //pocet cyklu na tmave
+int lightCounter;  //pocet cyklu na svetle
+
+task writeData(){   //tohle nam zapise hodnoty promenych do souboru
      byte handle;
      short bytesWritten;
      DeleteFile("data.txt");
@@ -19,10 +20,10 @@ task writeData(){
      }
 }
 
-task followLine(){
-     steering = INITIALSTEERING;
-     while(true){
-        light = Sensor(IN_1);
+task followLine(){                               //sleduj caru
+     steering = INITIALSTEERING;                 //uvodni nastaveni zataceni
+     while(true){                                //opakuj do nekonecna
+        light = Sensor(IN_1);                    //zmerim  nataveni sensoru
 
         if(light >= TRESHOLD) {                  //pokud jsme na svetle
            blackCounter = 0;                     //vynuluj black counter
@@ -30,20 +31,20 @@ task followLine(){
            if(lightCounter < 50) {               // pokud jsme na svetle kratce
               steering =  INITIALSTEERING;       // zacej malo
            } else {                              // jinak
-              if(steering < 90) steering += 2;          // zatacej hodne
+              if(steering < 90) steering += 2;   // zatacej hodne
            }
 
         } else {                                 // a ted pokud jsme na tmave
-           lightCounter = 0;
-           blackCounter += 1;
+           lightCounter = 0;                     //lightCounter=0
+           blackCounter += 1;                    //blackCounter=blackCounter+1
            if(blackCounter < 50) {               // pokud jsme na tmave kratce
-              steering =  -INITIALSTEERING;       // zacej malo
+              steering =  -INITIALSTEERING;      // zacej malo
            } else {                              // jinak
-             if(steering > -90)steering-=2;                     // zatacej hodne
-           }
+             if(steering > -90)steering-=2;      // pokud je steering vetsi nez -90..
+           }                                         //..stering=steering-2
         }
-        OnFwdSync(OUT_BC, 100 , steering);
-        Wait(10);
+        OnFwdSync(OUT_BC, 100 , steering);       //zapni motory s nastavenim zatacenim
+        Wait(10);                                //pockej 10
      }
 }
 

@@ -1,0 +1,43 @@
+#define TRESHOLD 40
+#define INITIALSTEERING 25
+#define STEERINGSTEP 1
+
+int light;
+int steering;
+
+task writeData(){
+     byte handle;
+     short bytesWritten;
+     DeleteFile("data.txt");
+     CreateFile("data.txt", 4096, handle);
+     string write;
+     while(true){
+       write  = StrCat(NumToStr(light),",",NumToStr(steering));
+       WriteLnString(handle,write, bytesWritten);
+       Wait(100);
+     }
+}
+
+task followLine(){
+     steering = INITIALSTEERING;
+     while(true){
+        light = Sensor(IN_1);
+
+        if(light >= TRESHOLD) {                  //pokud jsme na svetle
+           if(steering < 40) {
+             steering += STEERINGSTEP ;          //zvysuj zatacku
+           }
+        } else {                                 // a ted pokud jsme na tmave
+           if(steering > -40) {
+              steering -= STEERINGSTEP ;
+           }
+        }
+        OnFwdSync(OUT_BC, 100 , steering);
+        Wait(2);
+     }
+}
+
+task main(){
+     Precedes(followLine, writeData);
+     SetSensorLight(IN_1);
+}
