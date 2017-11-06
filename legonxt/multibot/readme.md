@@ -18,9 +18,9 @@ Zapojení:
 Algoritmy
 =========
 - nejprve jsme zkoušeli naivní algoritmus carovac.nxc, ktery jednoduse jede pokud vidi caru a toci se pokud ji nevidi. Pomale, ale spolehlive.
-- nasledne jsme zkusili algoritmy stridajici pravou a levou zatacku dle toho, zda vidi svetlou nebo bilou. Postupne jsme je doplnili o zvyseni zataceni, pokud robot jednu barvu vidi dlouho. Tyto jsou cara.nxc a cara-final.nxc
+- nasledne jsme zkusili algoritmy stridajici pravou a levou zatacku dle toho, zda vidi svetlou nebo bilou. Postupne jsme je doplnili o zvyseni zataceni, pokud robot jednu barvu vidi dlouho. Tyto jsou cara.nxc a cara-best.nxc
 
-Vysledek cara-final.nxc.
+Vysledek cara-best.nxc.
 
-[linkname](https://youtu.be/TfHb00dVfD4)
+[Video jizdy](https://youtu.be/TfHb00dVfD4)
 
