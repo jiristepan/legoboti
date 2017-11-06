@@ -5,7 +5,8 @@ Robot je postaven podle:
 
 http://www.nxtprograms.com/NXT2/multi-bot/vehicle/steps.html
 
-ZapojenÌ:
+Zapojen√≠:
+=========
 * IN 1: senzor light
 * IN 2: senzor ultrasonic
 * IN 3: senzor zvuk
@@ -13,3 +14,13 @@ ZapojenÌ:
 * OUT_C: motor pravy pas
 
 ![Multibot](https://github.com/jiristepan/legoboti/blob/master/legonxt/multibot/multibot.jpg?raw=true)
+
+Algoritmy
+=========
+- nejprve jsme zkou≈°eli naivn√≠ algoritmus carovac.nxc, ktery jednoduse jede pokud vidi caru a toci se pokud ji nevidi. Pomale, ale spolehlive.
+- nasledne jsme zkusili algoritmy stridajici pravou a levou zatacku dle toho, zda vidi svetlou nebo bilou. Postupne jsme je doplnili o zvyseni zataceni, pokud robot jednu barvu vidi dlouho. Tyto jsou cara.nxc a cara-final.nxc
+
+Vysledek cara-final.nxc.
+
+[linkname](https://youtu.be/TfHb00dVfD4)
+
